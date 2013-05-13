@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Project>
+  <Desktop>
+    <Static>
+      <Debug-Log>
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1381</ColumnWidth1></Debug-Log>
+      <Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1035</ColumnWidth1><ColumnWidth2>276</ColumnWidth2><ColumnWidth3>69</ColumnWidth3></Build>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>124</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+      </Workspace>
+      <Disassembly>
+        <col-names>
+          
+          
+        <item>Disassembly</item><item>_I0</item></col-names>
+        <col-widths>
+          
+          
+        <item>500</item><item>20</item></col-widths>
+        <DisasmHistory/>
+        
+        
+      <ShowCodeCoverage>0</ShowCodeCoverage><ShowInstrProfiling>0</ShowInstrProfiling></Disassembly>
+    </Static>
+    <Windows>
+      
+      
+      
+    <Wnd3>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-22733-14130</Identity>
+            <TabName>Debug Log</TabName>
+            <Factory>Debug-Log</Factory>
+            <Session/>
+          </Tab>
+          <Tab>
+            <Identity>TabID-22210-14140</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd3><Wnd4>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-714-14133</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>YA_PRJ_MQX3.8.1</ExpandedNode><ExpandedNode>YA_PRJ_MQX3.8.1/Source</ExpandedNode><ExpandedNode>YA_PRJ_MQX3.8.1/Source/APP</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd4><Wnd5>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-11462-14137</Identity>
+            <TabName>Disassembly</TabName>
+            <Factory>Disassembly</Factory>
+            <Session/>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd5></Windows>
+    <Editor>
+      
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\MQX\USB_Task.h</Filename><XPos>0</XPos><YPos>30</YPos><SelStart>1702</SelStart><SelEnd>1702</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\MQX\USB_File.c</Filename><XPos>0</XPos><YPos>42</YPos><SelStart>1524</SelStart><SelEnd>1524</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\psp\lwmsgq.h</Filename><XPos>0</XPos><YPos>21</YPos><SelStart>1514</SelStart><SelEnd>1514</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\usb\host\usb_classes.c</Filename><XPos>0</XPos><YPos>168</YPos><SelStart>835</SelStart><SelEnd>835</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\psp\mqx.h</Filename><XPos>0</XPos><YPos>841</YPos><SelStart>31430</SelStart><SelEnd>31430</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\psp\mqx_cnfg.h</Filename><XPos>0</XPos><YPos>72</YPos><SelStart>3708</SelStart><SelEnd>3719</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\user_config.h</Filename><XPos>0</XPos><YPos>96</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\bsp\bsp.h</Filename><XPos>0</XPos><YPos>21</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\psp\psp_time.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>600</SelStart><SelEnd>600</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\lib\twrk60n512.iar\psp\io.h</Filename><XPos>0</XPos><YPos>33</YPos><SelStart>9213</SelStart><SelEnd>9213</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\APP\MenuView.c</Filename><XPos>0</XPos><YPos>6</YPos><SelStart>1044</SelStart><SelEnd>1044</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\APP\System.C</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>442</SelStart><SelEnd>442</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\Freescale\Freescale MQX 3.8.1\mqx\source\bsp\twrk60n512\mqx_main.c</Filename><XPos>0</XPos><YPos>27</YPos><SelStart>1449</SelStart><SelEnd>1449</SelEnd></Tab><ActiveTab>12</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\APP\yada_prj.c</Filename><XPos>0</XPos><YPos>27</YPos><SelStart>2969</SelStart><SelEnd>2969</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\MQX\USB_Task.c</Filename><XPos>0</XPos><YPos>180</YPos><SelStart>7358</SelStart><SelEnd>7358</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\APP\MenuView.h</Filename><XPos>0</XPos><YPos>48</YPos><SelStart>3047</SelStart><SelEnd>3047</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\APP\includes.h</Filename><XPos>0</XPos><YPos>6</YPos><SelStart>754</SelStart><SelEnd>760</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Source\APP\System.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>189</SelStart><SelEnd>189</SelEnd></Tab><ActiveTab>2</ActiveTab></Pane><Sizes><Pane><X>646551</X><Y>1000000</Y></Pane><Pane><X>353448</X><Y>1000000</Y></Pane></Sizes><SplitMode>4</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-01c38998><key>iaridepm.enu1</key></Toolbar-01c38998><Toolbar-01c4b038><key>debuggergui.enu1</key></Toolbar-01c4b038><Toolbar-01c4aea8><key>armjlink.enu1</key></Toolbar-01c4aea8></Sizes></Row0></Top><Left><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>575</Bottom><Right>198</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>138889</sizeHorzCX><sizeHorzCY>244499</sizeHorzCY><sizeVertCX>138889</sizeVertCX><sizeVertCY>705379</sizeVertCY></Rect></Wnd4></Sizes></Row0></Left><Right><Row0><Sizes><Wnd5><Rect><Top>-2</Top><Left>-2</Left><Bottom>575</Bottom><Right>198</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>138889</sizeHorzCX><sizeHorzCY>244499</sizeHorzCY><sizeVertCX>138889</sizeVertCX><sizeVertCY>705379</sizeVertCY></Rect></Wnd5></Sizes></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1442</Right><x>-2</x><y>-2</y><xscreen>1444</xscreen><yscreen>200</yscreen><sizeHorzCX>1002778</sizeHorzCX><sizeHorzCY>244499</sizeHorzCY><sizeVertCX>138889</sizeVertCX><sizeVertCY>244499</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Project>
+
+
