@@ -1,0 +1,17 @@
+新建此工程基本与新建一个基本工程类似，不同点如下：
+1、编译器的路径增加
+$PROJ_DIR$\..\lib\twrk60n512.iar\
+$PROJ_DIR$\..\lib\twrk60n512.iar\bsp
+$PROJ_DIR$\..\lib\twrk60n512.iar\psp
+$PROJ_DIR$\..\lib\twrk60n512.iar\bsp\Generated_Code
+$PROJ_DIR$\..\lib\twrk60n512.iar\rtcs
+$PROJ_DIR$\..\lib\twrk60n512.iar\mfs
+$PROJ_DIR$\..\lib\twrk60n512.iar\usb\host
+$PROJ_DIR$\..\lib\twrk60n512.iar\shell
+$PROJ_DIR$\..\lib\twrk60n512.iar\usb
+$PROJ_DIR$\..
+$PROJ_DIR$\..\Source\APP
+$PROJ_DIR$\..\Source\MQX
+
+2、需要将
+Freescale MQX 3.8.1\shell\source\include下面的sh_prv.h文件拷贝到Freescale MQX 3.8.1\lib\twrk60n512.iar\shell
