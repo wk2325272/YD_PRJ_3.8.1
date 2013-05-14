@@ -62,6 +62,7 @@
 #include "usb_file.h"
 
 #define _USB_DBUG_  /* wk@130513 --> add */
+extern volatile U8 RefreshFlg; // 页面刷新标志 
 
 #define USB_EVENT_ATTACH    (1)
 #define USB_EVENT_DETACH    (2)
@@ -282,6 +283,8 @@ void USB_task(uint_32 param)
       _mem_free(shell_ptr);
                         
       USB_Flg=1; // wk @130407 --> USB 插入
+      RefreshFlg=2;  // wk@130514-->有U盘插入时，刷新显示
+      
   /* wk @130405 --> make some dirs <-- end */  
             
         } else if (msg.body == USB_EVENT_DETACH) {
@@ -295,6 +298,8 @@ void USB_task(uint_32 param)
                 usb_filesystem_uninstall(usb_fs_handle);
                 
                 USB_Flg=0; // wk @130407 --> USB 拔出
+                
+                RefreshFlg=2;  // wk@130514-->有U盘拔出时，刷新显示
                 
                 // Mark file system as unmounted
                 fs_mountp &= ~(1 << (dsp->mount - 'a'));

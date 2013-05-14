@@ -283,7 +283,8 @@ void MainLoop()
             YADA_71(PageIcon,55,400,102,425,55,450);
         }
     }
-  /* бнбн*/
+ 
+   /* бнбн*/
   switch(RefreshFlg)
   {
   case 1:

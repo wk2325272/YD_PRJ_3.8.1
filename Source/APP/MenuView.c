@@ -28,10 +28,14 @@ uchar SysDataSend[56]; // K60写给DSP的数据
 U16 EventNum[9];  // wk @130405 --> 9次事件发生次数保存，每个事件占2字节，能记录65535次
 U32 EventAddr[100]; // wk@130405 -->记录事件发生的时间：月、日、时、分、秒，每个占4字节
 U8 USB_Flg=0;  // wk @130407 --> USB 是否插入标志
-U16 evntyear_old=0;
 U8 time[7];
 U8 SavePowerFlg; // WK @130401 --> 电能质量数据存储标志 1时存储
-
+/* wk@130513 --> 事件和基本电能数据存储用变量*/
+char file_nameES[12]="wk12345.csv",dir_nameES[5]="2013",monthDir_nameES[3]="12";       
+uint_16 month_oldES=0;
+U16 year_oldES=0;        
+char file_namePS[10]="wk384.csv",dir_namePS[5]="1000";
+uint_16 year_oldPS=0;
 /* wk@130508 --> 用于波形显示，后期需要优化 */
 U8 EvntWave[6144]={0}; // wk @130504 --> 定义局部变量时，程序跑飞，暂时定义成全局变量
 U16 EVEUI[768];
@@ -1146,11 +1150,12 @@ void GUI_SYS_PARASET(void)
         YADA_C0(ParaSetAddr, ParaSetC108, 63);  // WK --> 写暂存缓冲区
         delay_us(10);
         YADA_C108(ParaSetAddr, 9);   //写入有效值，每次10个
-        delay_us(10);  
         
         SysSet.ParaSaveFlg=0;  // WK --> 清楚标志
         
         TimeSet(); // wk@130510 --> 重新设置时间
+        delay_us(10); 
+        file_namePS[0]='w'; // wk @130513 --> 每次设置时间后，基本电能质量数据都要从新建立新的文件
         
         _mem_free(shell_ptr); 
     }
@@ -1641,9 +1646,6 @@ void GUI_INIT_SET(void)
     
     if(InitAck)
     {
-//        memset(SysFlashDataT,0,84);//SysFlashData[0~85]赋初值0
-//        for(uchar i=0;i<84;i++)
-//          SysFlashDataT[i]=0;
         flg_int();
 
         shell_ptr->ARGC=2;
@@ -1676,7 +1678,6 @@ void GUI_INIT_SET(void)
         YADA_98(200, 211, 0x22, 0x81, 0x02, 0xffe0, 0x0000, PBUF, 0);
         InitAck=0;
     }
-//    else
 
     _mem_free(shell_ptr); 
 }
@@ -1767,10 +1768,10 @@ void GUI_EventList(void)
       for(uchar i=0;i<wNum;i++)
       {
           EvntPgUpFlg=0;
-          if(temp_year!=evntyear_old)
+          if(temp_year!=year_oldES)
           {
-            temp_year=evntyear_old;
-            sprintf(temp_dir,"%d",evntyear_old);
+            temp_year=year_oldES;
+            sprintf(temp_dir,"%d",year_oldES);
             
             shell_ptr->ARGC = 2;
             shell_ptr->ARGV[0]="cd";
@@ -1860,7 +1861,7 @@ void GUI_EventWave(U8 U_DISK)
         shell_ptr->ARGV[1]="u:\\event"; 
         Shell_cd(shell_ptr->ARGC, shell_ptr->ARGV);   
         
-        sprintf(temp_dir,"%d",evntyear_old);
+        sprintf(temp_dir,"%d",year_oldES);
     //      shell_ptr->ARGC = 2;
     //      shell_ptr->ARGV[0]="cd";
         shell_ptr->ARGV[1]=temp_dir; 
@@ -1991,10 +1992,10 @@ void EventSave(U8 U_DISK)
           SHELL_CONTEXT_PTR    shell_ptr;
           shell_ptr = _mem_alloc_zero( sizeof( SHELL_CONTEXT ));
           _mem_set_type(shell_ptr, MEM_TYPE_SHELL_CONTEXT);
-//          static   char_ptr file_name="12345678.csv",evntdir_name,monthDir_name;
-          static char file_name[12]="wk12345.csv",evntdir_name[5]="2013",monthDir_name[3]="12";
           
-          static uint_16 month_old=0;
+//          static char file_name[12]="wk12345.csv",evntdir_name[5]="2013",monthDir_name[3]="12";
+//          
+//          static uint_16 month_old=0;
           
           TIME_STRUCT             time_sf;
           DATE_STRUCT             date_sf;     
@@ -2013,39 +2014,39 @@ void EventSave(U8 U_DISK)
           shell_ptr->ARGV[1]="u:\\event"; 
           Shell_cd(shell_ptr->ARGC, shell_ptr->ARGV);
         
-          if(evntyear_old!=date_sf.YEAR) // wk --> creata a dir named of year
+          if(year_oldES!=date_sf.YEAR) // wk --> creata a dir named of year
           {
 //            evntdir_name=num2string(date_sf.YEAR,4,0);
-            sprintf(evntdir_name,"%d",date_sf.YEAR);
-            evntyear_old=date_sf.YEAR;
+            sprintf(dir_nameES,"%d",date_sf.YEAR);
+            year_oldES=date_sf.YEAR;
             
             shell_ptr->ARGC = 2;
             shell_ptr->ARGV[0]="mkdir";
-            shell_ptr->ARGV[1]=evntdir_name; 
+            shell_ptr->ARGV[1]=dir_nameES; 
             Shell_mkdir(shell_ptr->ARGC, shell_ptr->ARGV);
           }
           
           shell_ptr->ARGC = 2;
           shell_ptr->ARGV[0]="cd";
-          shell_ptr->ARGV[1]=evntdir_name; 
+          shell_ptr->ARGV[1]=dir_nameES; 
           Shell_cd(shell_ptr->ARGC, shell_ptr->ARGV);
-          if(month_old!=date_sf.MONTH)
+          if(month_oldES!=date_sf.MONTH)
           {
 //            monthDir_name=num2string(date_sf.MONTH,2,0);
-            sprintf(monthDir_name,"%d",date_sf.MONTH);
-            month_old=date_sf.MONTH;
+            sprintf(monthDir_nameES,"%d",date_sf.MONTH);
+            month_oldES=date_sf.MONTH;
             
             shell_ptr->ARGC = 2;
             shell_ptr->ARGV[0]="mkdir";
-            shell_ptr->ARGV[1]=monthDir_name; 
+            shell_ptr->ARGV[1]=monthDir_nameES; 
             Shell_mkdir(shell_ptr->ARGC, shell_ptr->ARGV);
           }
           shell_ptr->ARGC = 2;
           shell_ptr->ARGV[0]="cd";
-          shell_ptr->ARGV[1]=monthDir_name; 
+          shell_ptr->ARGV[1]=monthDir_nameES; 
           Shell_cd(shell_ptr->ARGC, shell_ptr->ARGV);
                     
-          sprintf(file_name,"%d.csv",date_sf.SECOND+(date_sf.MINUTE<<6)+(date_sf.HOUR<<12)+(date_sf.DAY<<17));
+          sprintf(file_nameES,"%d.csv",date_sf.SECOND+(date_sf.MINUTE<<6)+(date_sf.HOUR<<12)+(date_sf.DAY<<17));
           
           if(EVEnum==100)
           {
@@ -2069,11 +2070,11 @@ void EventSave(U8 U_DISK)
          
           shell_ptr->ARGC=4;
           shell_ptr->ARGV[0]="write";
-          shell_ptr->ARGV[1]=file_name;
+          shell_ptr->ARGV[1]=file_nameES;
           shell_ptr->ARGV[2]="current";
           shell_ptr->ARGV[3]="0";
           Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,1,&EVEnum);
-          Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,7,&time);
+          Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,7,time);
           /* wk @130412 --> test */
 //          uchar test[]={0,1,2,3,4,5,6,7,8,9,10};
 //          Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,100,test);
@@ -2105,14 +2106,20 @@ void PowerSave(void)
       shell_ptr = _mem_alloc_zero( sizeof( SHELL_CONTEXT ));
       _mem_set_type(shell_ptr, MEM_TYPE_SHELL_CONTEXT);
       uint_32 file_size;
-//      static   char_ptr file_name="123456.csv",dir_name="1000";
-     static char file_name[10]="wk384.csv",dir_name[5]="1000";
-      static uint_16 year_old=0;
+//      static char file_name[10]="wk384.csv",dir_name[5]="1000";
+//      static uint_16 year_old=0;
       TIME_STRUCT             time_sf;
       DATE_STRUCT             date_sf;
       
       _time_get(&time_sf);
       _time_to_date(&time_sf,&date_sf);
+      time[0]=date_sf.YEAR&0x00ff;
+      time[1]=date_sf.YEAR>>8;
+      time[2]=date_sf.MONTH;
+      time[3]=date_sf.DAY;
+      time[4]=date_sf.HOUR;
+      time[5]=date_sf.MINUTE;
+      time[6]=date_sf.SECOND;
       
 //      printf("Y=%d\tM=%d\tD=%d\tH=%d\tM=%d\tS=%d\n",date_sf.YEAR,date_sf.MONTH,date_sf.DAY,date_sf.HOUR,date_sf.MINUTE,date_sf.SECOND);
       
@@ -2121,61 +2128,54 @@ void PowerSave(void)
       shell_ptr->ARGV[1]="u:\\power"; 
       Shell_cd(shell_ptr->ARGC, shell_ptr->ARGV);
       
-      if(year_old!=date_sf.YEAR) // wk --> creata a dir named of year
+      if(year_oldPS!=date_sf.YEAR) // wk --> creata a dir named of year
       {
 //        dir_name=num2string((uint_32)date_sf.YEAR,4,0);
-        sprintf(dir_name,"%d",date_sf.YEAR);
-        year_old=date_sf.YEAR;
+        sprintf(dir_namePS,"%d",date_sf.YEAR);
+        year_oldPS=date_sf.YEAR;
         
 //        shell_ptr->ARGC = 2;
 //        shell_ptr->ARGV[0]="mkdir";
-        shell_ptr->ARGV[1]=dir_name; 
+        shell_ptr->ARGV[1]=dir_namePS; 
         Shell_mkdir(shell_ptr->ARGC, shell_ptr->ARGV);
       }
       /* wk @130407 --> 注意： 这里可以添加年份文件夹查找的，确定文件夹已经建立在打开 */
 //      shell_ptr->ARGC = 2;  //WK --> 进入 dir_name 下面
 //      shell_ptr->ARGV[0]="cd";
-      shell_ptr->ARGV[1]=dir_name; 
+      shell_ptr->ARGV[1]=dir_namePS; 
       Shell_cd(shell_ptr->ARGC, shell_ptr->ARGV);
       
-      if(*file_name=='w') // wk --> 第一次进来时，用月、日、时获取文件名
+      if(*file_namePS=='w') // wk --> 第一次进来时，用月、日、时获取文件名
       {
 //       file_name=num2string(date_sf.MINUTE+(date_sf.DAY<<6)+(date_sf.MONTH<<11),6,1);
-        sprintf(file_name,"%d.CSV",date_sf.HOUR+(date_sf.DAY<<5)+(date_sf.MONTH<<10));
+        sprintf(file_namePS,"%d.CSV",date_sf.HOUR+(date_sf.DAY<<5)+(date_sf.MONTH<<10));
       }
       else
       {
 //        shell_ptr->ARGC = 2;
 //        shell_ptr->ARGV[0]="df_s";
-        shell_ptr->ARGV[1]=file_name;   //wk --> 注意：查找的文件名暂时必须要是大写
+        shell_ptr->ARGV[1]=file_namePS;   //wk --> 注意：查找的文件名暂时必须要是大写
         Shell_search_file_r1(shell_ptr->ARGC, shell_ptr->ARGV,&file_size);
         
-        if(file_size>134217728)  // wk --> 128M = 128*1024*1024 bytes
+        if(file_size>=134216618)  // wk --> 128M = 128*1024*1024 bytes = 134217728 bytes,但是我们取 2539的52862倍 134216618
         {
 //          file_name=num2string(date_sf.MINUTE+(date_sf.DAY<<6)+(date_sf.MONTH<<11),6,1);
-          sprintf(file_name,"%d.CSV",date_sf.HOUR+(date_sf.DAY<<5)+(date_sf.MONTH<<10));
+          sprintf(file_namePS,"%d.CSV",date_sf.HOUR+(date_sf.DAY<<5)+(date_sf.MONTH<<10));
         }
       }
       
       shell_ptr->ARGC=4;
       shell_ptr->ARGV[0]="write";
-      shell_ptr->ARGV[1]=file_name;
+      shell_ptr->ARGV[1]=file_namePS;
       shell_ptr->ARGV[2]="current";
       shell_ptr->ARGV[3]="0";
-      Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,7,&date_sf);
+      Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,7,time);
            
 //      shell_ptr->ARGC=4;
 //      shell_ptr->ARGV[0]="write";
 //      shell_ptr->ARGV[1]=file_name;
 //      shell_ptr->ARGV[2]="current";
 //      shell_ptr->ARGV[3]="0";
-      /* wk @130412 --> test power save */
-//      uchar test[200]={0,1,2,3,4,5,6,7,8,9,10};
-//      for(int i=0;i<200;i++)
-//        test[i]=i+5;
-//      for(uchar i=0;i<10;i++)
-//      Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,200,test);
-      /* wk @130412 --> write power data */
         Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,Pow_SIZE,PowRxchar);
 
      _mem_free(shell_ptr);  // wk @130403 --> important
@@ -2251,4 +2251,14 @@ void flg_int(void)   // wk --> 一些标志的初始化
     SysFlashData[62]=SysFlashDataT[62]=UHarmonic>>8;   //偶谐波
     SysFlashData[65]=SysFlashDataT[65]=IHarmonic;   //奇谐波
     
+    /* wk@130514--> 事件记录信息初始化  */
+    for(uchar i=0;i<9;i++)
+    {
+      EventNum[i]=0;
+    }
+    for(uchar i=0;i<100;i++)
+    {
+      EventAddr[i]=0;
+    }
+   
 }
