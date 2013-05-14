@@ -86,14 +86,13 @@
 //#define EVESET_INDEX 29
 #define EVESET_INDEX 25
 
-//#define EVESEND_FLAG 85
-#define EVESEND_FLAG 70
+#define EVESEND_FLAG 69
 #define LINENUM 256
 
 #define StatusAddr 0x9100 //工作状态的地址，3个数据，42个字节。
 
-extern U8 SysFlashDataT[84];   //系统设置的数据的临时参数
-extern U8 SysFlashData[84];   //wk @130326 -->写入Flash的系统设置参数
+extern U8 SysFlashDataT[70];   //系统设置的数据的临时参数
+extern U8 SysFlashData[70];   //wk @130326 -->写入Flash的系统设置参数
 extern uchar SysDataSend[56]; // K60写给DSP的数据
 //MenuV_EXT U8 NPage[115]; //写入芯片flash有关的数组。NPage[0~99]为事件nandflash的页值，NPage[100]为事件总次数，NPage[101~114]为各类事件次数
 //MenuV_EXT U16 NBlock[100]; //写入芯片flash有关的数组。nandflash的block数

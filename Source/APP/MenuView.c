@@ -22,8 +22,8 @@ const U16 COLOR[] = {0xffe0,0x07E0,0xf800,0x0000};
 U8 HarmoInfo[][8]= {"A","B","C","幅 值","含有率"};
 //U8 text[][3]= {"Ua","Ub","Uc","Ia","Ib","Ic"};//ColorF[9]= {0};
 U8 SysParaOldIndex=0,SysEventOldIndex=0,EventOldIndex=0,EVEnum_old;
-U8 SysFlashDataT[84]={0,0,0,0,0,1,1,0};   //系统设置的数据的临时参数
-U8 SysFlashData[84]={0,0,0,0,0,1,1,0};   //wk @130326 -->写入Flash的系统设置参数
+U8 SysFlashDataT[70]={0,0,0,0,0,1,1,0};   //系统设置的数据的临时参数
+U8 SysFlashData[70]={0,0,0,0,0,1,1,0};   //wk @130326 -->写入Flash的系统设置参数
 uchar SysDataSend[56]; // K60写给DSP的数据
 U16 EventNum[9];  // wk @130405 --> 9次事件发生次数保存，每个事件占2字节，能记录65535次
 U32 EventAddr[100]; // wk@130405 -->记录事件发生的时间：月、日、时、分、秒，每个占4字节
@@ -1245,11 +1245,14 @@ void GUI_SYS_EVENTSET(void)
         shell_ptr->ARGC=5;
         shell_ptr->ARGV[0]="read";
         shell_ptr->ARGV[1]="sysevent.txt";
-        shell_ptr->ARGV[2]="44";
+        shell_ptr->ARGV[2]="45";
         shell_ptr->ARGV[3]="begin";
         shell_ptr->ARGV[4]="0";   // WK @130326  --> 事件设置参数偏移26保存
         Shell_read_wk(shell_ptr->ARGC, shell_ptr->ARGV,&(SysFlashDataT[25]));  
 #endif      
+        if(SysFlashDataT[EVESEND_FLAG]==1)
+          SysSet.EventSendFlg=1; // 防止上一次掉电时数据没有发送完成，下次上电接着发送
+        
         SysSet.SwFlg=0;
         
         for(k=0; k<11; k++)//在第一次时全部显示，以后每次数据更改时只修改相应的项
@@ -1278,11 +1281,12 @@ void GUI_SYS_EVENTSET(void)
     
     if(SysSet.DataFlg)//修改一项数据
     {
-      if(SysSet.DataFlg)
-      {
-        SysFlashDataT[EVESEND_FLAG]=0;
-      }
-      
+      /* wk @130514 --> 优化2 */
+//      if(SysSet.DataFlg)
+//      {
+//        SysFlashDataT[EVESEND_FLAG]=0;
+//      }
+      /* wk @130514 --> end */
       if(SysSet.DataCnt==0)//clear key
         {
             String2F=0;
@@ -1311,10 +1315,12 @@ void GUI_SYS_EVENTSET(void)
         SysFlashDataT[temp+3+EVESET_INDEX]=(U8)(Float2L>>24);
         
         U16 OneC108[7]= {0x3204,SysEventXY[2*SysSet.EvntIndex],SysEventXY[2*SysSet.EvntIndex + 1],0xffff,0x0000};
-        if(SysFlashDataT[EVESEND_FLAG])
-        {
-          OneC108[3]=0xffe0;
-        }
+        /* wk @130514--> 优化2*/
+//        if(SysFlashDataT[EVESEND_FLAG])
+//        {
+//          OneC108[3]=0xffe0;
+//        }
+        /* wk @130514--> end*/
         OneC108[5] =(U16) (SysFlashDataT[3+temp+EVESET_INDEX]<<8)+(U16)(SysFlashDataT[2+temp+EVESET_INDEX]);
         OneC108[6] =(U16) (SysFlashDataT[1+temp+EVESET_INDEX]<<8)+(U16)(SysFlashDataT[temp+EVESET_INDEX]);
         
@@ -1540,11 +1546,13 @@ void GUI_SYS_EVENTSET(void)
     Shell_update(shell_ptr->ARGC, shell_ptr->ARGV); 
 #endif  // WK -->保存时  SysFlashData 全部保存 END
  
-#if 1  // wk @130326 --> 只保存事件界面数据
+#if 1  // wk @130326 --> 只保存事件界面数据 44个事件阈值数据 + 1个K602DSP发送状态标志
     for(int i=0;i<44;i++) 
     {
       SysFlashData[i+25]=SysFlashDataT[i+25];  
     }
+    SysFlashData[EVESEND_FLAG]=SysSet.EventSendFlg;
+      
     shell_ptr->ARGC=2;
     shell_ptr->ARGV[0]="cd";
     shell_ptr->ARGV[1]="f:\\"; 
@@ -1560,12 +1568,11 @@ void GUI_SYS_EVENTSET(void)
     shell_ptr->ARGV[1]="sysevent.txt";
     shell_ptr->ARGV[2]="begin";
     shell_ptr->ARGV[3]="0";  // WK @130326 --> 偏移 26  注意：偏移25时，初始上电时，波形个数为2.55，因此该到了偏移26
-    Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,44,&(SysFlashData[25]));
+    Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,45,&(SysFlashData[25]));
     
     shell_ptr->ARGC=2;
     shell_ptr->ARGV[0]="update";// wk --> update
     shell_ptr->ARGV[1]="flush";
-//    Shell_update(shell_ptr->ARGC, shell_ptr->ARGV,44,&(SysFlashSave[25]));
     Shell_update(shell_ptr->ARGC, shell_ptr->ARGV);
 #endif
            
@@ -1666,7 +1673,7 @@ void GUI_INIT_SET(void)
         Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,25,SysFlashDataT);
         
         shell_ptr->ARGV[1]="sysevent.txt";
-        Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,44,&SysFlashDataT[25]);
+        Shell_write_binary(shell_ptr->ARGC, shell_ptr->ARGV,45,&SysFlashDataT[25]);
         
         shell_ptr->ARGC=2;
         shell_ptr->ARGV[0]="update"; // wk --> update
