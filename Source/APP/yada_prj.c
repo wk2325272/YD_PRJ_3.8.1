@@ -130,7 +130,7 @@ void YaDa
   
   YADA_70(PageStart); //必要的初始化后进入首页
   delay_ms(1000); // wk -->test  延时1s
-//  delay_ms(4000); // wk -->test  延时4s，等待U盘启动完成
+  delay_ms(4000); // wk -->test  延时4s，等待U盘启动完成
 //  YADA_E4();  // wk --> 屏幕校正
   YADA_70(MenuTop);  // 进入菜单首页
   

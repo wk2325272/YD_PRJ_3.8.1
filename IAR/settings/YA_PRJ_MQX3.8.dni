@@ -25,7 +25,7 @@ TypeViolation=1
 UnspecRange=1
 ActionState=1
 [DebugChecksum]
-Checksum=-1599944543
+Checksum=1967374965
 [JLinkDriver]
 TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
@@ -49,8 +49,9 @@ Category=_ 0
 LoggingEnabled=_ 0
 LogFile=_ ""
 [Aliases]
-A0=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\psp\cortex\cortex_boot.s" "D:\Freescale\Freescale MQX 3.8.1\mqx\source\psp\cortex\cortex_boot.s"
-Count=1
+A0=_ "D:\Freescale\Freescale MQX 3.8.1\mqx\source\bsp\twrk60n512\init_hw.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\bsp\twrk60n512\init_hw.c"
+A1=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\psp\cortex\cortex_boot.s" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\psp\cortex\cortex_boot.s"
+Count=2
 SuppressDialog=1
 [Trace1]
 Enabled=0

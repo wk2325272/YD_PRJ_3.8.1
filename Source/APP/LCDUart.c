@@ -54,10 +54,12 @@ void UartTouch_init()
 {
    MQX_FILE_PTR uart_touch = NULL;  // wk --> 20130107
 //   ISR_UART_STRUCT uart_isr;
-   
+#if LCD_UART_SEL 
    uart_touch  = fopen( "ittyb:", NULL );  // 液晶使用的是串口 ttyb
-//   uart_touch  = fopen( "ittye:", NULL );  // wk --> test event of uart
-     if( uart_touch == NULL )
+#else
+   uart_touch  = fopen( "ittye:", NULL );  // wk --> test event of uart  @130513-->新的PCB液晶控制宽口
+#endif  
+   if( uart_touch == NULL )
    {
       /* device could not be opened */
       _task_block();

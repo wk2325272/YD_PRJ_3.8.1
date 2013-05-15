@@ -22,7 +22,11 @@ MQX_FILE_PTR uart_lcd = NULL;
 /* Uart initialization for send data*/
 void UartLCD_init()
 {
+#if LCD_UART_SEL
   uart_lcd  = fopen( "ttyb:", NULL );
+#else 
+  uart_lcd  = fopen( "ttye:", NULL );
+#endif
   if( uart_lcd == NULL )
    {
       /* device could not be opened */
