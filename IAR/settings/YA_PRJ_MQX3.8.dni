@@ -25,7 +25,7 @@ TypeViolation=1
 UnspecRange=1
 ActionState=1
 [DebugChecksum]
-Checksum=1967374965
+Checksum=-2051274918
 [JLinkDriver]
 TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
@@ -37,10 +37,6 @@ StopOnThrow=_ 0
 ShowArgs=0
 [Disassembly]
 MixedMode=1
-[Disassemble mode]
-mode=0
-[Breakpoints2]
-Count=0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -48,11 +44,6 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[Aliases]
-A0=_ "D:\Freescale\Freescale MQX 3.8.1\mqx\source\bsp\twrk60n512\init_hw.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\bsp\twrk60n512\init_hw.c"
-A1=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\psp\cortex\cortex_boot.s" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\psp\cortex\cortex_boot.s"
-Count=2
-SuppressDialog=1
 [Trace1]
 Enabled=0
 ShowSource=1
@@ -64,3 +55,12 @@ Mode=1
 Graph=0
 Symbiont=0
 Exclusions=
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+A0=_ "D:\Freescale\Freescale MQX 3.8.1\mqx\source\bsp\twrk60n512\init_hw.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\bsp\twrk60n512\init_hw.c"
+A1=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\psp\cortex\cortex_boot.s" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\psp\cortex\cortex_boot.s"
+Count=2
+SuppressDialog=1
