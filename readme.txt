@@ -10,3 +10,10 @@
 @130515:
 1、New3.8.1bsp_twrk60n512_130512_a.a：针对新的DSP板子的库文件，修给了printf打印串口
 2、定义了宏变量LCD_UART_SEL选择液晶通信的串口
+
+@130520:
+bsp.h中添加BSPCFG_SEL_BOARD,用于选择不同的板子，1-->NEW(Designed by ZHH)  0--> OLD(Dedigned by WK)
+使用：
+1、修改bsp.h，并重新编译
+2、替换库文件
+3、替换工程中的bsp.h文件（非常重要）
