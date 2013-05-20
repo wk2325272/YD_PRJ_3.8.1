@@ -32,7 +32,8 @@
 #define MenuEventList 41
 #define MenuEventWave 42
 
-#define LCD_UART_SEL 0 // wk@130513:1-->串口2 0-->串口4
+//#define LCD_UART_SEL 0 // wk@130513:1-->串口2 0-->串口4
+
 typedef struct SS //系统参数设置及事件设置页面中使用的变量
 {
     U8 SwFlg;//页面切换标志

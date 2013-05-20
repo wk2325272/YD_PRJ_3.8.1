@@ -25,7 +25,7 @@ TypeViolation=1
 UnspecRange=1
 ActionState=1
 [DebugChecksum]
-Checksum=-2051274918
+Checksum=-686452126
 [JLinkDriver]
 TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
@@ -61,6 +61,10 @@ mode=0
 Count=0
 [Aliases]
 A0=_ "D:\Freescale\Freescale MQX 3.8.1\mqx\source\bsp\twrk60n512\init_hw.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\bsp\twrk60n512\init_hw.c"
-A1=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\psp\cortex\cortex_boot.s" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\psp\cortex\cortex_boot.s"
-Count=2
+A1=_ "D:\Freescale\Freescale MQX 3.8.1\mqx\source\bsp\twrk60n512\mqx_main.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\bsp\twrk60n512\mqx_main.c"
+A2=_ "D:\Freescale\Freescale MQX 3.8.1\mqx\source\io\spi\int\spi_int.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\io\spi\int\spi_int.c"
+A3=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\fio\io_fopen.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\fio\io_fopen.c"
+A4=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\name\na_findi.c" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\name\na_findi.c"
+A5=_ "c:\Freescale\Freescale MQX 3.8\mqx\source\psp\cortex\cortex_boot.s" "D:\Freescale\Freescale_MQX_3.8.1\mqx\source\psp\cortex\cortex_boot.s"
+Count=6
 SuppressDialog=1

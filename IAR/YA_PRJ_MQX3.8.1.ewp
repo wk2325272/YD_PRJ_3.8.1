@@ -1847,6 +1847,12 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\lib\twrk60n512.iar\bsp\New3.8.1bsp_twrk60n512_130512_a.a</name>
+      <excluded>
+        <configuration>Debug</configuration>
+      </excluded>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\lib\twrk60n512.iar\bsp\New3.8.1bsp_twrk60n512_130520.a</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\lib\twrk60n512.iar\psp\psp_twrk60n512.a</name>

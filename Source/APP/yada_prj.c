@@ -117,7 +117,7 @@ void YaDa
       uint_32 initial_data
    )
 {
-#ifdef _GUI_DBUG_
+ #ifdef _GUI_DBUG_
    printf("\n----------MAIN&GUI_Task----------\n");
    printf("\n----------             ----------\n");
    printf("\n----------             ----------\n");
