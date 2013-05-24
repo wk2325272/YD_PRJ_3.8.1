@@ -46,7 +46,7 @@
 
   
 #ifndef ENET_IPADDR
-   #define ENET_IPADDR  IPADDR(49,123,72,248) //IPADDR(169,254,3,3)   //dx // 
+   #define ENET_IPADDR  IPADDR(49,123,72,200) //IPADDR(169,254,3,3)   //dx // 
 #endif
 
 #ifndef ENET_IPMASK

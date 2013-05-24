@@ -53,14 +53,14 @@ void tcp_socket_task( uint_32 val)
         continue;
       }
       /* Send back a quote: */   
-      send(sock, "\nYOU ARE MY BABY!! ", strlen("\nYOU ARE MY BABY! "), 0);// 6.发送包
+      send(sock, "\nWelcome to PQ System!! ", strlen("\nWelcome to PQ System!! "), 0);// 6.发送包
       connect(sock, &raddr, rlen);
       _time_delay(1000);
      // int cnt=100;
 #define TCPIP_SOCKET_DATA_LEN      100
       char socket_buf[TCPIP_SOCKET_DATA_LEN+1]="";
       socket_buf[TCPIP_SOCKET_DATA_LEN] = '\0';
-      char socket_s[10]="send";
+//      char socket_s[10]="send";
       while(1)
       {
         /* wk @130331 --> recv()函数是事件触发机制的，如果调用了此函数，需要外部事件触发，此任务才能激活*/
@@ -69,9 +69,16 @@ void tcp_socket_task( uint_32 val)
           break;
         } 
         
-        send(sock, socket_s, strlen(socket_s), 0);///////////回显for test
-        printf("%s",socket_buf);////////////////////回显for test
-       // cnt--;
+        if(socket_buf[0]=='p')
+          send(sock, "\nPower Quality Data!", strlen("\nPower Quality Data!"), 0);
+        else if(socket_buf[0]=='e')
+          send(sock, "\nEvent Data!", strlen("\nEvent Data!"), 0);
+        else
+          send(sock,"\nInvalid Order!",strlen("\nInvalid Order!"),0);
+          
+//        send(sock, socket_s, strlen(socket_s), 0);///////////回显for test
+//        printf("%s",socket_buf);////////////////////回显for test
+//        cnt--;
       }
       shutdown(sock, FLAG_CLOSE_TX);// 7.关包
     } 
